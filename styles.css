@@ -1,0 +1,616 @@
+/* Custom styles for FinalFare */
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Added animations from login.html */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Base Styles */
+:root {
+    --primary-color: #3B82F6;
+    --primary-light: #60A5FA;
+    --primary-dark: #2563EB;
+    --accent-color: #10B981; /* Keeping a touch of green for accent */
+    --text-light: #F9FAFB;
+    --text-dark: #1F2937;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--text-light); /* White background */
+    overflow-x: hidden; /* Prevent horizontal scroll on animations */
+}
+
+/* Navigation */
+nav {
+    backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 40; /* Ensure navigation is above most content but below modals/sidebar */
+}
+
+nav a {
+    position: relative;
+    transition: color 0.3s ease;
+    color: #4b5563; /* text-gray-600 */
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Added glass effect for navigation */
+nav.glass-effect {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Added bottom border for separation */
+}
+
+nav .text-blue-600 {
+    color: var(--primary-color) !important;
+}
+
+nav .bg-blue-600 {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+nav .hover\:bg-blue-700:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Hero Section */
+.hero-section {
+    animation: fadeIn 1s ease-out;
+    background-color: var(--text-light); /* White background */
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    backdrop-filter: none;
+    transition: none;
+}
+
+.hero-content:hover {
+    background-color: transparent;
+    backdrop-filter: none;
+}
+
+.hero-title {
+    text-shadow: none;
+    animation: fadeIn 1s ease-out;
+    color: var(--text-dark); /* text-gray-900 */
+    margin-bottom: 0.5rem;
+}
+
+.hero-title .text-green-700 {
+    color: var(--primary-dark) !important; /* Using primary-dark for consistency */
+    text-shadow: none;
+}
+
+.hero-subtitle {
+    text-shadow: none;
+    animation: fadeIn 1s ease-out 0.2s backwards;
+    color: #374151; /* text-gray-700 */
+    margin-bottom: 1.5rem;
+}
+
+/* Added gradient text style */
+.gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero-content .mt-5 .sm\:flex > div {
+    transition: all 0.3s ease;
+}
+
+.hero-content .mt-5 .sm\:flex > div:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero-content .mt-5 .sm\:flex a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Added button hover effect */
+.button-hover-effect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.btn-secondary {
+    background-color: var(--text-light);
+    color: var(--primary-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-light);
+    color: white;
+    transform: translateY(-2px);
+    border-color: var(--primary-light);
+}
+
+/* Service Cards */
+.service-card {
+    transition: all 0.3s ease;
+    border: 1px solid #E5E7EB;
+    background-color: white;
+    border-color: var(--primary-color);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+/* Added glass effect and hover effect for service package cards */
+.service-package-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Adjusted border color */
+    overflow: hidden;
+    transform: transition-all duration-300; /* Already have transform and transition in HTML, consolidating */
+    /* hover styles moved below */
+}
+
+.service-package-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Form Elements */
+input, textarea, select {
+    border: 1px solid #E5E7EB;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: none;
+}
+
+/* Added input focus effect */
+.input-focus-effect:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    transform: translateY(-1px);
+}
+
+.input-error {
+    border-color: #EF4444;
+}
+
+.input-success {
+    border-color: var(--accent-color); /* Using accent for success */
+}
+
+/* Animations */
+.animate-fade-in {
+    animation: fadeIn 1s ease-out;
+}
+
+.animate-slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.5s ease-out;
+}
+
+/* Ensure elements are initially hidden for fade-in animation */
+.opacity-0 {
+    opacity: 0;
+}
+
+/* Utility class to hide elements */
+.hidden {
+    display: none !important;
+}
+
+/* Removed potentially disruptive animations */
+/* .float-animation { animation: float 3s ease-in-out infinite; } */
+/* .pulse-animation { animation: pulse 2s ease-in-out infinite; } */
+
+/* Loading Spinner */
+.spinner {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Success Message */
+.success-message {
+    background: linear-gradient(90deg, 
+        var(--accent-color) 0%,
+        var(--accent-color) 50%,
+        var(--accent-color) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    margin-bottom: 1rem;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    background-color: white; /* White background for mobile menu */
+    backdrop-filter: blur(10px);
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .contact-form {
+        padding: 1rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* Custom card hover effects */
+.shadow-lg {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.shadow-lg:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+/* Footer link hover effects */
+footer a {
+    color: #d1d5db; /* text-gray-300 */
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--primary-light);
+}
+
+/* Loading animation for images */
+.img-loading {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.img-loaded {
+    opacity: 1;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Custom focus styles for accessibility */
+a:focus, button:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Custom selection color */
+::selection {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+/* Map container styles */
+.map-container {
+    transition: transform 0.3s ease;
+}
+
+.map-container:hover {
+    transform: scale(1.02);
+}
+
+/* Form validation styles */
+.input-error {
+    border-color: #EF4444;
+}
+
+.input-success {
+    border-color: var(--accent-color);
+}
+
+/* Error Message */
+.error-message {
+    color: #EF4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Loading States */
+.loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Custom tooltip */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    background: var(--text-dark);
+    color: white;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+[data-tooltip]:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+/* Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .video-background,
+    .video-controls,
+    .mobile-menu-button {
+        display: none !important;
+    }
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: var(--primary-color);
+    color: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 50;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+}
+
+.scroll-to-top:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    background-color: #1f2937; /* gray-800 */
+    color: white;
+}
+
+/* Map Container */
+/* Existing map container styles are fine */
+
+/* Form Validation Messages */
+/* Existing styles are fine */
+
+/* Loading States */
+/* Existing styles are fine */
+
+/* Tooltip */
+/* Existing tooltip styles are fine */
+
+/* Service Card */
+/* Existing service card styles are fine */
+
+/* Form Elements */
+/* Existing form element styles are fine */
+
+/* Scroll Indicator */
+/* Existing scroll indicator styles are fine */
+
+/* Animations */
+/* Existing animation styles are fine */
+
+/* Loading Spinner */
+/* Existing spinner styles are fine */
+
+/* Success Message */
+/* Existing success message styles are fine */
+
+/* Mobile Menu */
+/* Existing mobile menu styles are fine */
+
+/* Responsive Design */
+/* Existing responsive styles are fine */
+
+/* Print Styles */
+/* Existing print styles are fine */
+
+/* Shopping Cart Sidebar */
+#cartSidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 80%; /* Adjust width as needed, consider responsiveness */
+    max-width: 320px; /* Max width for larger screens */
+    background-color: white;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%); /* Initially off-screen */
+    transition: transform 0.3s ease-in-out;
+    z-index: 50; /* Ensure sidebar is above everything */
+    overflow-y: auto; /* Allow scrolling if cart content overflows */
+}
+
+#cartSidebar.translate-x-0 {
+    transform: translateX(0); /* Slide in */
+}
+
+/* Media query to ensure desktop nav is block at md breakpoint */
+@media (min-width: 768px) {
+    #mobile-menu.md\:block {
+        display: block !important;
+    }
+} 

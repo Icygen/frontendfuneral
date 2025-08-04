@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - FinalFare</title>
+    <link rel="icon" type="image/x-icon" href="304754604_497405039052305_4821624535742965518_n">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 font-['Poppins']">
+    <!-- Facebook SDK -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v22.0"></script>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg backdrop-blur-lg bg-opacity-90 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300">FinalFare</a>
+                </div>
+                <div id="mobile-menu" class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 transition-colors duration-300">Home</a>
+                        <a href="services.html" class="text-blue-600 hover:text-blue-700 px-3 py-2 transition-colors duration-300">Services</a>
+                        <a href="coffins.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 transition-colors duration-300">Coffins</a>
+                        <a href="contact.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 transition-colors duration-300">Contact</a>
+                        <a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300 button-hover-effect">Login</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-button p-2 rounded-md hover:bg-gray-100 transition-colors duration-300">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative pt-24 pb-12 h-[50vh] flex items-center justify-center overflow-hidden" data-animate="fade-in">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" 
+                 alt="Funeral Service Background" 
+                 class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-r from-white to-transparent"></div>
+        </div>
+        <div class="relative z-10 text-center text-gray-900 text-shadow">
+            <h1 class="text-5xl font-extrabold sm:text-6xl lg:text-7xl leading-tight gradient-text bg-gradient-to-r from-blue-600 to-purple-600">Our Services</h1>
+            <p class="mt-4 text-xl sm:text-2xl max-w-2xl mx-auto">Comprehensive funeral services to honor your loved ones with dignity and compassion.</p>
+        </div>
+    </div>
+
+    <!-- Service Filter -->
+    <div class="py-12 bg-gray-50" data-animate="fade-up">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0 md:space-x-6 bg-white p-6 rounded-lg shadow-md">
+                <div class="flex-1 w-full">
+                    <label for="serviceSearch" class="sr-only">Search services</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <input type="text" id="serviceSearch" placeholder="Search services..."
+                            class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 input-focus-effect">
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full md:w-auto">
+                    <label for="serviceCategory" class="sr-only">Filter by category</label>
+                    <select id="serviceCategory" class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-all duration-300">
+                        <option value="">All Categories</option>
+                        <option value="pre-planning">Pre-Planning</option>
+                        <option value="memorial">Memorial Services</option>
+                        <option value="support">Grief Support</option>
+                    </select>
+                    <label for="priceRange" class="sr-only">Filter by price</label>
+                    <select id="priceRange" class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-all duration-300">
+                        <option value="">All Prices</option>
+                        <option value="0-1000">Under ₱1,000</option>
+                        <option value="1000-5000">₱1,000 - ₱5,000</option>
+                        <option value="5000-10000">₱5,000 - ₱10,000</option>
+                        <option value="10000+">Over ₱10,000</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="py-16 bg-gradient-to-b from-gray-50 to-white" data-animate="fade-up">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Pre-Planning Service -->
+                <div class="service-card bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col relative" data-category="pre-planning" data-price="5000">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Pre-Planning" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white via-white/70 to-transparent"></div>
+                    <div class="p-8 flex flex-col items-start flex-grow relative z-10">
+                        <div class="text-blue-600 mb-4">
+                            <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-3">Pre-Planning Service</h3>
+                        <p class="text-gray-600 mb-6 flex-grow">Plan ahead and ensure your wishes are carried out with our comprehensive pre-planning service.</p>
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-2xl font-bold text-blue-600">₱5,000</span>
+                            <button onclick="showServiceDetails('pre-planning')" class="text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300 flex items-center">
+                                Learn More
+                                <svg class="ml-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8L21 12m0 0l-3.75 4m3.75-4H3"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Memorial Service -->
+                <div class="service-card bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col relative" data-category="memorial" data-price="8000">
+                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Memorial Service" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white via-white/70 to-transparent"></div>
+                    <div class="p-8 flex flex-col items-start flex-grow relative z-10">
+                         <div class="text-blue-600 mb-4">
+                            <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-3">Memorial Service</h3>
+                        <p class="text-gray-600 mb-6 flex-grow">Honor your loved one with a personalized memorial service that celebrates their life.</p>
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-2xl font-bold text-blue-600">₱8,000</span>
+                            <button onclick="showServiceDetails('memorial')" class="text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300 flex items-center">
+                                Learn More
+                                <svg class="ml-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8L21 12m0 0l-3.75 4m3.75-4H3"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grief Support -->
+                <div class="service-card bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col relative" data-category="support" data-price="3000">
+                     <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=400&q=80" alt="Grief Support" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white via-white/70 to-transparent"></div>
+                    <div class="p-8 flex flex-col items-start flex-grow relative z-10">
+                        <div class="text-blue-600 mb-4">
+                           <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-3">Grief Support</h3>
+                        <p class="text-gray-600 mb-6 flex-grow">Professional counseling and support groups to help you through the grieving process.</p>
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-2xl font-bold text-blue-600">₱3,000</span>
+                            <button onclick="showServiceDetails('grief-support')" class="text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300 flex items-center">
+                                Learn More
+                                <svg class="ml-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8L21 12m0 0l-3.75 4m3.75-4H3"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">How It Works</h2>
+                <p class="mt-4 text-lg text-gray-600 sm:text-xl">Simple steps to arrange compassionate funeral services</p>
+            </div>
+
+            <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Step 1 -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-lg font-medium text-gray-900">1. Contact Us</h3>
+                        <p class="mt-2 text-base text-gray-600">Reach out to our compassionate team day or night via phone or online form.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                 <div class="flex flex-col items-center text-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.707-8.707z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-lg font-medium text-gray-900">2. Personalize Services</h3>
+                        <p class="mt-2 text-base text-gray-600">We'll guide you through selecting the right services and options to honor your loved one.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                 <div class="flex flex-col items-center text-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-lg font-medium text-gray-900">3. Compassionate Care</h3>
+                        <p class="mt-2 text-base text-gray-600">Our dedicated team handles all arrangements with the utmost care, dignity, and professionalism.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Packages -->
+    <div class="py-16 bg-white relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 mix-blend-multiply"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12 sm:text-4xl lg:text-5xl gradient-text bg-gradient-to-r from-blue-600 to-purple-600">Service Packages</h2>
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                <!-- Basic Package -->
+                <div class="service-package-card glass-effect rounded-lg shadow-xl border border-gray-100 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl p-8 flex flex-col">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Basic Package</h3>
+                    <p class="text-gray-700 mb-6 flex-grow">Essential services for a dignified farewell</p>
+                    <ul class="space-y-3 mb-8 text-gray-700">
+                        <li class="flex items-center">
+                            <svg class="h-6 w-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Basic casket
+                        </li>
+                        <li class="flex items-center">
+                             <svg class="h-6 w-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Funeral service
+                        </li>
+                        <li class="flex items-center">
+                             <svg class="h-6 w-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Basic documentation
+                        </li>
+                    </ul>
+                    <div class="text-center mt-auto">
+                        <span class="text-3xl font-bold text-blue-600 block mb-6">₱15,000</span>
+                        <button onclick="selectPackage('basic')" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-md hover:from-blue-700 hover:to-purple-700 transition-colors duration-300 text-lg font-medium shadow-md hover:shadow-lg button-hover-effect">
+                            Select Package
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Standard Package -->
+                <div class="service-package-card glass-effect rounded-lg shadow-xl border border-gray-100 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl p-8 flex flex-col">
+                     <h3 class="text-2xl font-semibold text-gray-900 mb-4">Standard Package</h3>
+                    <p class="text-gray-700 mb-6 flex-grow">Comprehensive services for a complete ceremony</p>
+                    <ul class="space-y-3 mb-8 text-gray-700">
+                        <li class="flex items-center">
+                            <svg class="h-6 w-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Standard casket
+                        </li>
+                        <li class="flex items-center">
+                             <svg class="h-6 w-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Viewing and service
+                        </li>
+                        <li class="flex items-center">
+                             <svg class="h-6 w-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Transportation
+                        </li>
+                         <li class="flex items-center">
+                             <svg class="h-6 w-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Standard documentation
+                        </li>
+                    </ul>
+                    <div class="text-center mt-auto">
+                        <span class="text-3xl font-bold text-blue-600 block mb-6">₱25,000</span>
+                        <button onclick="selectPackage('standard')" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-md hover:from-blue-700 hover:to-purple-700 transition-colors duration-300 text-lg font-medium shadow-md hover:shadow-lg button-hover-effect">
+                            Select Package
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Premium Package -->
+                <div class="service-package-card glass-effect rounded-lg shadow-xl border border-gray-100 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl p-8 flex flex-col">
+                     <h3 class="text-2xl font-semibold text-gray-900 mb-4">Premium Package</h3>
+                    <p class="text-gray-700 mb-6 flex-grow">Full-service package for a complete and personal tribute</p>
+                    <ul class="space-y-3 mb-8 text-gray-700">
+                        <li class="flex items-center">
+                            <svg class="h-6 w-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Premium casket
+                        </li>
+                        <li class="flex items-center">
+                             <svg class="h-6 w-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Personalized service
+                        </li>
+                        <li class="flex items-center">
+                             <svg class="h-6 w-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Premium transportation
+                        </li>
+                         <li class="flex items-center">
+                             <svg class="h-6 w-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Comprehensive documentation
+                        </li>
+                         <li class="flex items-center">
+                             <svg class="h-6 w-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Grief support sessions
+                        </li>
+                    </ul>
+                     <div class="text-center mt-auto">
+                        <span class="text-3xl font-bold text-blue-600 block mb-6">₱40,000</span>
+                        <button onclick="selectPackage('premium')" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-md hover:from-blue-700 hover:to-purple-700 transition-colors duration-300 text-lg font-medium shadow-md hover:shadow-lg button-hover-effect">
+                            Select Package
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gradient-to-b from-blue-50 to-white" id="testimonialsSection">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Testimonials</h2>
+                <p class="mt-2 text-4xl font-extrabold tracking-tight text-gray-900">What Families Say About Us</p>
+            </div>
+            <div class="relative max-w-4xl mx-auto">
+                <div id="testimonialCarousel" class="overflow-hidden">
+                    <div class="testimonial-slide transition-opacity duration-700 ease-in-out opacity-100" aria-hidden="false">
+                        <div class="bg-white p-10 rounded-2xl shadow-xl flex flex-col items-center">
+                            <div class="mb-6">
+                                <span class="inline-flex items-center justify-center h-20 w-20 rounded-full bg-blue-200 text-blue-800 text-3xl font-bold">MS</span>
+                            </div>
+                            <p class="text-gray-600 italic text-center mb-6 text-xl">"The compassion and professionalism shown by FinalFare during our difficult time was exceptional. They handled everything with dignity and respect."</p>
+                            <div class="text-center">
+                                <p class="font-semibold text-gray-900 text-lg">Maria Santos</p>
+                                <p class="text-gray-500 text-sm">San Jose Del Monte</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide transition-opacity duration-700 ease-in-out opacity-0 absolute inset-0" aria-hidden="true">
+                        <div class="bg-white p-10 rounded-2xl shadow-xl flex flex-col items-center">
+                            <div class="mb-6">
+                                <span class="inline-flex items-center justify-center h-20 w-20 rounded-full bg-blue-200 text-blue-800 text-3xl font-bold">JR</span>
+                            </div>
+                            <p class="text-gray-600 italic text-center mb-6 text-xl">"Their attention to detail and understanding of our needs made a difficult time much easier to bear. Thank you for your exceptional service."</p>
+                            <div class="text-center">
+                                <p class="font-semibold text-gray-900 text-lg">John Reyes</p>
+                                <p class="text-gray-500 text-sm">Bulacan</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide transition-opacity duration-700 ease-in-out opacity-0 absolute inset-0" aria-hidden="true">
+                        <div class="bg-white p-10 rounded-2xl shadow-xl flex flex-col items-center">
+                            <div class="mb-6">
+                                <span class="inline-flex items-center justify-center h-20 w-20 rounded-full bg-blue-200 text-blue-800 text-3xl font-bold">LC</span>
+                            </div>
+                            <p class="text-gray-600 italic text-center mb-6 text-xl">"The pre-planning service gave us peace of mind. The staff was knowledgeable and made the process simple and stress-free."</p>
+                            <div class="text-center">
+                                <p class="font-semibold text-gray-900 text-lg">Lourdes Cruz</p>
+                                <p class="text-gray-500 text-sm">San Jose Del Monte</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carousel Dots -->
+                <div class="flex justify-center mt-8 space-x-3" id="testimonialDots" role="tablist" aria-label="Testimonials navigation">
+                    <button class="w-4 h-4 rounded-full bg-blue-300" aria-label="Show testimonial 1" aria-selected="true" tabindex="0"></button>
+                    <button class="w-4 h-4 rounded-full bg-blue-200" aria-label="Show testimonial 2" aria-selected="false" tabindex="-1"></button>
+                    <button class="w-4 h-4 rounded-full bg-blue-200" aria-label="Show testimonial 3" aria-selected="false" tabindex="-1"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Details Modal -->
+    <div id="serviceModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl shadow-2xl overflow-hidden w-full max-w-lg p-8 relative transform transition-all duration-300 scale-100 opacity-100">
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors duration-300 text-xl font-bold">&times;</button>
+            <h3 id="modalTitle" class="text-2xl font-bold text-gray-900 mb-4">Service Title</h3>
+            <p id="modalDescription" class="text-gray-700 mb-6 leading-relaxed">Service description goes here. Provide more detailed information about the service here.</p>
+            <!-- You can add more details or actions here -->
+            <div class="mt-6 text-right">
+                 <button class="bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition-colors duration-300 text-lg font-medium shadow-md hover:shadow-lg button-hover-effect">Inquire About Service</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold text-white">FinalFare</h3>
+                    <p class="mt-2 text-gray-400">&copy; 2023 FinalFare. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="hover:text-white transition-colors duration-300">Home</a>
+                    <a href="services.html" class="hover:text-white transition-colors duration-300">Services</a>
+                    <a href="contact.html" class="hover:text-white transition-colors duration-300">Contact</a>
+                    <!-- Add more footer links as needed -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    // Testimonial Carousel
+    (function() {
+        const slides = document.querySelectorAll('#testimonialCarousel .testimonial-slide');
+        const dots = document.querySelectorAll('#testimonialDots button');
+        let current = 0;
+        let interval = null;
+        function showSlide(idx) {
+            slides.forEach((slide, i) => {
+                if (i === idx) {
+                    slide.classList.remove('opacity-0', 'absolute');
+                    slide.classList.add('opacity-100');
+                    slide.setAttribute('aria-hidden', 'false');
+                } else {
+                    slide.classList.remove('opacity-100');
+                    slide.classList.add('opacity-0', 'absolute');
+                    slide.setAttribute('aria-hidden', 'true');
+                }
+            });
+            dots.forEach((dot, i) => {
+                dot.className = 'w-4 h-4 rounded-full ' + (i === idx ? 'bg-blue-300' : 'bg-blue-200');
+                dot.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+                dot.tabIndex = i === idx ? 0 : -1;
+            });
+            current = idx;
+        }
+        function nextSlide() {
+            showSlide((current + 1) % slides.length);
+        }
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                showSlide(i);
+                resetInterval();
+            });
+        });
+        function resetInterval() {
+            if (interval) clearInterval(interval);
+            interval = setInterval(nextSlide, 3000);
+        }
+        showSlide(0);
+        resetInterval();
+    })();
+    </script>
+</body>
+</html> 

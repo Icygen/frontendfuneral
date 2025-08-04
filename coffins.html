@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffins - FinalFare</title>
+    <link rel="icon" type="image/x-icon" href="304754604_497405039052305_4821624535742965518_n">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 font-['Poppins']">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg backdrop-blur-lg bg-opacity-90 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300">FinalFare</a>
+                </div>
+                <div id="mobile-menu" class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 transition-colors duration-300">Home</a>
+                        <a href="services.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 transition-colors duration-300">Services</a>
+                        <a href="coffins.html" class="text-blue-600 hover:text-blue-700 px-3 py-2 transition-colors duration-300">Coffins</a>
+                        <a href="contact.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 transition-colors duration-300">Contact</a>
+                        <a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300">Login</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-button p-2 rounded-md hover:bg-gray-100 transition-colors duration-300">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative pt-24 pb-12 h-[50vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" 
+                 alt="Coffin Collection" 
+                 class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-r from-white to-transparent"></div>
+        </div>
+        <div class="relative z-10 text-center text-gray-900 text-shadow">
+            <h1 class="text-5xl font-extrabold sm:text-6xl lg:text-7xl leading-tight">Our Coffin Collection</h1>
+            <p class="mt-4 text-xl sm:text-2xl max-w-2xl mx-auto">Dignified and elegant options to honor your loved ones</p>
+        </div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0 md:space-x-6 bg-white p-6 rounded-lg shadow-md">
+                <div class="flex-1 w-full">
+                    <label for="coffinSearch" class="sr-only">Search coffins</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <input type="text" id="coffinSearch" placeholder="Search coffins..."
+                            class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full md:w-auto">
+                    <select id="materialFilter" class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">All Materials</option>
+                        <option value="wood">Wood</option>
+                        <option value="metal">Metal</option>
+                        <option value="eco">Eco-Friendly</option>
+                    </select>
+                    <select id="priceFilter" class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">All Prices</option>
+                        <option value="0-50000">Under ₱50,000</option>
+                        <option value="50000-100000">₱50,000 - ₱100,000</option>
+                        <option value="100000+">Over ₱100,000</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coffin Grid -->
+    <div class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Modern Metal Casket -->
+                <div class="coffin-card bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl relative">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Modern Metal Casket Background" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white via-white/70 to-transparent"></div>
+                    <div class="p-8 relative z-10">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-3">Modern Metal Casket</h3>
+                        <p class="text-gray-600 mb-6">Contemporary design with brushed stainless steel finish and premium interior lining.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-blue-600">₱75,000</span>
+                            <button onclick="showCoffinDetails('modern-metal')" class="text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Eco-Friendly Coffin -->
+                <div class="coffin-card bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl relative">
+                    <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=400&q=80" alt="Eco-Friendly Coffin Background" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white via-white/70 to-transparent"></div>
+                    <div class="p-8 relative z-10">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-3">Eco-Friendly Coffin</h3>
+                        <p class="text-gray-600 mb-6">Sustainable materials with biodegradable construction, perfect for environmentally conscious families.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-blue-600">₱35,000</span>
+                            <button onclick="showCoffinDetails('eco-friendly')" class="text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classic Wooden Coffin -->
+                <div class="coffin-card bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl relative" data-material="wood" data-price="50000">
+                    <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Classic Wooden Coffin Background" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white via-white/70 to-transparent"></div>
+                    <div class="p-8 relative z-10">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-3">Classic Wooden Coffin</h3>
+                        <p class="text-gray-600 mb-6">Crafted from high-quality wood with a timeless design, offering elegance and tradition for your loved one.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-blue-600">₱50,000</span>
+                            <button onclick="showCoffinDetails('classic-wooden')" class="text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coffin Details Modal -->
+    <div id="coffinModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl shadow-2xl overflow-hidden w-full max-w-lg p-8 relative">
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors duration-300 text-xl font-bold">&times;</button>
+            <h3 id="modalTitle" class="text-2xl font-bold text-gray-900 mb-4">Coffin Title</h3>
+            <div id="modalImage" class="w-full h-64 mb-6 rounded-lg overflow-hidden">
+                <img src="" alt="" class="w-full h-full object-cover">
+            </div>
+            <p id="modalDescription" class="text-gray-700 mb-6 leading-relaxed">Detailed description goes here.</p>
+            <div class="space-y-4 mb-6">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Material:</span>
+                    <span id="modalMaterial" class="font-medium"></span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Dimensions:</span>
+                    <span id="modalDimensions" class="font-medium"></span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Weight Capacity:</span>
+                    <span id="modalWeight" class="font-medium"></span>
+                </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button class="bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition-colors duration-300 text-lg font-medium shadow-md hover:shadow-lg">Inquire About This Coffin</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold text-white">FinalFare</h3>
+                    <p class="mt-2 text-gray-400">&copy; 2023 FinalFare. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="hover:text-white transition-colors duration-300">Home</a>
+                    <a href="services.html" class="hover:text-white transition-colors duration-300">Services</a>
+                    <a href="coffins.html" class="hover:text-white transition-colors duration-300">Coffins</a>
+                    <a href="contact.html" class="hover:text-white transition-colors duration-300">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Coffin Filtering
+        const coffinSearch = document.getElementById('coffinSearch');
+        const materialFilter = document.getElementById('materialFilter');
+        const priceFilter = document.getElementById('priceFilter');
+        const coffinCards = document.querySelectorAll('.coffin-card');
+
+        function filterCoffins() {
+            const searchTerm = coffinSearch.value.toLowerCase();
+            const material = materialFilter.value;
+            const price = priceFilter.value;
+
+            coffinCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const cardMaterial = card.dataset.material;
+                const cardPrice = parseInt(card.dataset.price);
+
+                const matchesSearch = title.includes(searchTerm);
+                const matchesMaterial = !material || cardMaterial === material;
+                const matchesPrice = !price || isInPriceRange(cardPrice, price);
+
+                card.style.display = matchesSearch && matchesMaterial && matchesPrice ? 'block' : 'none';
+            });
+        }
+
+        function isInPriceRange(price, range) {
+            switch (range) {
+                case '0-50000':
+                    return price <= 50000;
+                case '50000-100000':
+                    return price > 50000 && price <= 100000;
+                case '100000+':
+                    return price > 100000;
+                default:
+                    return true;
+            }
+        }
+
+        coffinSearch.addEventListener('input', filterCoffins);
+        materialFilter.addEventListener('change', filterCoffins);
+        priceFilter.addEventListener('change', filterCoffins);
+
+        // Coffin Details Modal
+        const coffinModal = document.getElementById('coffinModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalImage = document.getElementById('modalImage').querySelector('img');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalMaterial = document.getElementById('modalMaterial');
+        const modalDimensions = document.getElementById('modalDimensions');
+        const modalWeight = document.getElementById('modalWeight');
+        const closeModal = document.getElementById('closeModal');
+
+        const coffinDetails = {
+            'modern-metal': {
+                title: 'Modern Metal Casket',
+                image: 'https://images.unsplash.com/photo-1516283188426-e62f4c493f1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+                description: 'The Modern Metal Casket features a sleek, contemporary design with a brushed stainless steel finish. It includes premium interior lining, adjustable bed, and secure locking mechanism.',
+                material: 'Stainless Steel',
+                dimensions: '210cm x 65cm x 50cm',
+                weight: 'Up to 200kg'
+            },
+            'eco-friendly': {
+                title: 'Eco-Friendly Coffin',
+                image: 'https://images.unsplash.com/photo-1516283188426-e62f4c493f1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+                description: 'Our Eco-Friendly Coffin is constructed from sustainable materials, designed to minimize environmental impact. It features natural finishes and biodegradable components.',
+                material: 'Sustainable Materials',
+                dimensions: '195cm x 55cm x 40cm',
+                weight: 'Up to 120kg'
+            },
+            'classic-wooden': {
+                title: 'Classic Wooden Coffin',
+                image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80',
+                description: 'The Classic Wooden Coffin is made from premium hardwood, featuring a polished finish and traditional craftsmanship. It provides a dignified and elegant choice.',
+                material: 'Hardwood',
+                dimensions: '200cm x 60cm x 45cm',
+                weight: 'Up to 150kg'
+            }
+        };
+
+        function showCoffinDetails(coffinId) {
+            const coffin = coffinDetails[coffinId];
+            if (coffin) {
+                modalTitle.textContent = coffin.title;
+                modalImage.src = coffin.image;
+                modalImage.alt = coffin.title;
+                modalDescription.textContent = coffin.description;
+                modalMaterial.textContent = coffin.material;
+                modalDimensions.textContent = coffin.dimensions;
+                modalWeight.textContent = coffin.weight;
+                coffinModal.classList.remove('hidden');
+            }
+        }
+
+        closeModal.addEventListener('click', () => {
+            coffinModal.classList.add('hidden');
+        });
+
+        coffinModal.addEventListener('click', (e) => {
+            if (e.target === coffinModal) {
+                coffinModal.classList.add('hidden');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html> 
