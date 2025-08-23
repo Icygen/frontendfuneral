@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service History & Tracking - FinalFare</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-[var(--ff-navy)] to-[var(--ff-charcoal)] font-['Poppins'] text-[var(--ff-charcoal)]">
+  <header class="bg-[var(--ff-beige)] shadow border-b border-[var(--ff-navy)]/10">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold text-[var(--ff-navy)]">Service History & Tracking</h1>
+      <p class="text-[var(--ff-charcoal)]">Review past arrangements, inquiries, and manage your bookings.</p>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 space-y-8">
+    <section class="bg-white rounded-xl shadow p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-semibold">Bookings</h2>
+        <button id="refreshBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg">Refresh</button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Note</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="bookingTable" class="bg-white divide-y divide-gray-200"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-xl shadow p-6">
+      <h2 class="text-xl font-semibold mb-4">Coffin Inquiries</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coffin</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Responded</th>
+            </tr>
+          </thead>
+          <tbody id="inquiryTable" class="bg-white divide-y divide-gray-200"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-xl shadow p-6">
+      <h2 class="text-xl font-semibold mb-4">Contact Messages</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Purpose</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+            </tr>
+          </thead>
+          <tbody id="contactTable" class="bg-white divide-y divide-gray-200"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-xl shadow p-6">
+      <h2 class="text-xl font-semibold mb-4">Newsletter Subscriptions</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+            </tr>
+          </thead>
+          <tbody id="newsletterTable" class="bg-white divide-y divide-gray-200"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    async function loadHistory() {
+      const res = await fetch('http://localhost:3000/api/history', { credentials: 'include' });
+      const data = await res.json();
+      if (!data.success) {
+        alert('Please log in first. Redirecting to login page.');
+        window.location.href = 'http://localhost:3000/login.html';
+        return;
+      }
+
+      const { bookings, inquiries, contacts, newsletters } = data.history;
+
+      const bookingBody = document.getElementById('bookingTable');
+      bookingBody.innerHTML = '';
+      bookings.forEach(b => {
+        const tr = document.createElement('tr');
+        const statusColor = b.status === 'completed' ? 'text-green-700 bg-green-100' : (b.status === 'cancelled' ? 'text-red-700 bg-red-100' : 'text-blue-700 bg-blue-100');
+        tr.innerHTML = `
+          <td class="px-6 py-4 whitespace-nowrap">${b.service}</td>
+          <td class="px-6 py-4 whitespace-nowrap">${b.date || '-'}</td>
+          <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusColor}">${b.status}</span></td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <input data-booking-note="${b.id}" class="border rounded px-2 py-1 w-64" value="${b.note || ''}" placeholder="Add a note" />
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap space-x-2">
+            <button data-cancel="${b.id}" class="px-3 py-1 bg-red-600 text-white rounded disabled:opacity-50" ${b.status !== 'scheduled' ? 'disabled' : ''}>Cancel</button>
+            <button data-save-note="${b.id}" class="px-3 py-1 bg-gray-700 text-white rounded">Save Note</button>
+          </td>
+        `;
+        bookingBody.appendChild(tr);
+      });
+
+      const inquiryBody = document.getElementById('inquiryTable');
+      inquiryBody.innerHTML = '';
+      inquiries.forEach(i => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="px-6 py-4 whitespace-nowrap">${i.coffin}</td>
+          <td class="px-6 py-4 whitespace-nowrap">${i.message || '-'}</td>
+          <td class="px-6 py-4 whitespace-nowrap">${i.date ? new Date(i.date).toLocaleString() : '-'}</td>
+          <td class="px-6 py-4 whitespace-nowrap">${i.responded ? 'Yes' : 'No'}</td>
+        `;
+        inquiryBody.appendChild(tr);
+      });
+
+      const contactBody = document.getElementById('contactTable');
+      contactBody.innerHTML = '';
+      contacts.forEach(c => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="px-6 py-4 whitespace-nowrap">${c.purpose || '-'}</td>
+          <td class="px-6 py-4 whitespace-nowrap">${c.message || '-'}</td>
+          <td class="px-6 py-4 whitespace-nowrap">${c.date ? new Date(c.date).toLocaleString() : '-'}</td>
+        `;
+        contactBody.appendChild(tr);
+      });
+
+      const newsBody = document.getElementById('newsletterTable');
+      newsBody.innerHTML = '';
+      newsletters.forEach(n => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="px-6 py-4 whitespace-nowrap">${n.email}</td>
+          <td class="px-6 py-4 whitespace-nowrap">${n.date ? new Date(n.date).toLocaleString() : '-'}</td>
+        `;
+        newsBody.appendChild(tr);
+      });
+
+      // Wire actions
+      document.querySelectorAll('[data-cancel]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.getAttribute('data-cancel');
+          const res = await fetch(`http://localhost:3000/api/bookings/${id}/cancel`, { method: 'POST', credentials: 'include' });
+          const result = await res.json();
+          if (result.success) {
+            loadHistory();
+          } else {
+            alert(result.message || 'Failed to cancel booking');
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-save-note]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.getAttribute('data-save-note');
+          const input = document.querySelector(`[data-booking-note="${id}"]`);
+          const res = await fetch(`http://localhost:3000/api/bookings/${id}/note`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ note: input.value })
+          });
+          const result = await res.json();
+          if (!result.success) alert(result.message || 'Failed to save note');
+        });
+      });
+    }
+
+    document.getElementById('refreshBtn').addEventListener('click', loadHistory);
+    loadHistory();
+  </script>
+</body>
+</html>
+
