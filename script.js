@@ -1,10 +1,11 @@
 // DOM Elements
 const mobileMenuButton = document.querySelector('.mobile-menu-button');
 const mobileMenu = document.getElementById('mobile-menu');
-const loginForm = document.querySelector('form');
-const userTypeButtons = document.querySelectorAll('.user-type-btn');
-const passwordInput = document.getElementById('password');
-const emailInput = document.getElementById('email-address');
+// Remove outdated login form references since login.html now has its own script
+// const loginForm = document.querySelector('form');
+// const userTypeButtons = document.querySelectorAll('.user-type-btn');
+// const passwordInput = document.getElementById('password');
+// const emailInput = document.getElementById('email-address');
 const contactForm = document.querySelector('.contact-form form');
 const navLinks = document.querySelectorAll('nav a');
 const scrollToTopButton = document.createElement('button');
@@ -82,210 +83,8 @@ document.querySelectorAll('section, .animate-on-scroll').forEach(element => {
     observer.observe(element);
 });
 
-// Form Validation and Enhancement (Login Form)
-if (loginForm) {
-    const formGroups = loginForm.querySelectorAll('.form-group');
-    let selectedUserType = null; // Keep track of selected user type
-
-    // Find and set initially selected user type if any (e.g., from a previous state)
-    userTypeButtons.forEach(button => {
-        if (button.classList.contains('active')) {
-            selectedUserType = button.dataset.type;
-        }
-    });
-
-    function validateLoginForm() {
-        let isValid = true;
-        formGroups.forEach(group => {
-            const input = group.querySelector('input');
-            const errorMessage = group.querySelector('.error-message');
-            
-            if (input.required && !input.value.trim()) {
-                showError(input, errorMessage, 'This field is required');
-                isValid = false;
-            } else if (input.type === 'email' && input.value) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(input.value)) {
-                    showError(input, errorMessage, 'Please enter a valid email address');
-                    isValid = false;
-                } else {
-                    hideError(input, errorMessage);
-                }
-            } else {
-                hideError(input, errorMessage);
-            }
-        });
-
-        if (!selectedUserType) {
-            // Assuming userTypeButtons exist and are required for login
-            if (userTypeButtons && userTypeButtons.length > 0) {
-                 alert('Please select a user type'); // Consider a less intrusive message
-                 isValid = false;
-            }
-        }
-
-        return isValid;
-    }
-
-    function showError(input, errorElement, message) {
-        input.classList.add('border-red-500', 'input-error'); // Add input-error class
-        errorElement.textContent = message;
-        errorElement.classList.remove('hidden');
-    }
-
-    function hideError(input, errorElement) {
-        input.classList.remove('border-red-500', 'input-error'); // Remove input-error class
-        input.classList.add('border-gray-300'); // Reset to default border
-        errorElement.classList.add('hidden');
-        errorElement.textContent = ''; // Clear error message
-    }
-
-    // Real-time validation for login form inputs
-    formGroups.forEach(group => {
-        const input = group.querySelector('input');
-        const errorMessage = group.querySelector('.error-message');
-        
-        if (input) { // Ensure input element exists
-            input.addEventListener('input', () => {
-                if (input.value.trim()) {
-                    if (input.type === 'email') {
-                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                        if (!emailRegex.test(input.value)) {
-                            showError(input, errorMessage, 'Please enter a valid email address');
-                        } else {
-                            hideError(input, errorMessage);
-                        }
-                    } else {
-                         // Basic validation for other required fields on input
-                        if (input.required && !input.value.trim()) {
-                             showError(input, errorMessage, 'This field is required');
-                        } else {
-                             hideError(input, errorMessage);
-                        }
-                    }
-                } else if (input.required) {
-                    showError(input, errorMessage, 'This field is required');
-                } else {
-                    hideError(input, errorMessage);
-                }
-            });
-        }
-    });
-
-
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        if (!validateLoginForm()) {
-            return;
-        }
-
-        const submitButton = loginForm.querySelector('button[type="submit"]');
-        const originalText = submitButton.innerHTML;
-        
-        // Show loading state
-        submitButton.innerHTML = `
-            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            Signing in...
-        `;
-        submitButton.disabled = true;
-        submitButton.classList.add('loading'); // Add loading class for styling
-
-        try {
-            // Simulate login (replace with actual API call)
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            // Redirect based on user type
-            if (selectedUserType === 'admin') {
-                console.log('Redirecting to admin dashboard...');
-                window.location.href = '/admin/dashboard'; // Example redirect
-            } else {
-                 console.log('Redirecting to customer dashboard...');
-                window.location.href = '/dashboard'; // Example redirect
-            }
-        } catch (error) {
-            // Show error message
-            console.error('Login error:', error);
-            // Find or create a div to display form-wide errors
-            let formErrorDiv = loginForm.querySelector('.form-error-message');
-            if (!formErrorDiv) {
-                formErrorDiv = document.createElement('div');
-                formErrorDiv.className = 'form-error-message mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded';
-                loginForm.insertBefore(formErrorDiv, loginForm.firstChild);
-            }
-            formErrorDiv.textContent = 'Invalid email or password. Please try again.';
-            formErrorDiv.classList.remove('hidden');
-            
-            // Remove error message after 5 seconds
-            setTimeout(() => {
-                formErrorDiv.classList.add('hidden');
-                 formErrorDiv.textContent = ''; // Clear message
-            }, 5000);
-        } finally {
-            // Reset button state
-            submitButton.innerHTML = originalText;
-            submitButton.disabled = false;
-             submitButton.classList.remove('loading');
-        }
-    });
-}
-
-// Password Visibility Toggle (Moved from login.html script block)
-// Ensure the button with onclick="togglePasswordVisibility()" exists in HTML
-window.togglePasswordVisibility = function() {
-    const passwordInput = document.getElementById('password');
-    if (passwordInput) {
-        const type = passwordInput.type === 'password' ? 'text' : 'password';
-        passwordInput.type = type;
-        // Optional: Toggle an icon here if you have an eye icon SVG inside the button
-        // const icon = document.querySelector('#password + button svg');
-        // if (icon) { /* toggle icon classes */ }
-    }
-};
-
-
-// User Type Selection (Moved and adapted from login.html script block)
-// Assumes userTypeButtons are elements that should have an 'active' state
-userTypeButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent default button click behavior
-        const type = button.dataset.type; // Get the user type from data attribute
-        
-        // Update the selectedUserType variable
-        selectedUserType = type;
-
-        // Remove active class and associated styles from all buttons
-        userTypeButtons.forEach(btn => {
-            btn.classList.remove('bg-blue-50', 'border-blue-500', 'text-blue-700', 'hover:bg-blue-100');
-            btn.classList.add('bg-white', 'border-gray-300', 'text-gray-700', 'hover:bg-gray-50');
-        });
-        
-        // Add active class and associated styles to the clicked button
-        button.classList.add('bg-blue-50', 'border-blue-500', 'text-blue-700', 'hover:bg-blue-100');
-        button.classList.remove('bg-white', 'border-gray-300', 'text-gray-700', 'hover:bg-gray-50');
-
-        console.log(`Selected user type: ${selectedUserType}`);
-
-        // Trigger re-validation of the form if user type is a required field
-        if (loginForm) { // Check if loginForm exists before calling validateLoginForm
-             validateLoginForm();
-        }
-    });
-});
-
-// Social Login Handler (Moved from login.html script block)
-// Ensure buttons with onclick="handleSocialLogin('provider')" exist in HTML
-window.handleSocialLogin = function(provider) {
-    // Implement social login logic here
-    console.log(`Logging in with ${provider}...`);
-    // Replace with actual social login initiation (e.g., redirect to OAuth provider)
-    // For demonstration, you might show a message or modal
-    alert(`Redirecting to ${provider} login... (Simulated)`);
-};
-
+// Remove outdated login form logic since login.html now handles its own authentication
+// The login form validation and submission is now handled in login.html's inline script
 
 // Service Filtering (Moved and adapted from services.html script block)
 const serviceSearch = document.getElementById('serviceSearch');
@@ -516,20 +315,7 @@ if (contactForm) {
     });
 }
 
-// User Type Selection (for login/signup form - if applicable)
-// Assumes userTypeButtons are radio buttons or similar elements
-userTypeButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent default button click behavior if not radio/checkbox
-        // Remove active class and associated styles from all buttons
-        userTypeButtons.forEach(btn => btn.classList.remove('active', 'bg-blue-50', 'border-blue-500', 'text-blue-700'));
-        // Add active class and associated styles to the clicked button
-        button.classList.add('active', 'bg-blue-50', 'border-blue-500', 'text-blue-700');
-        // You might want to update a hidden input field with the selected type
-        // const userTypeInput = document.getElementById('userType');
-        // if (userTypeInput) userTypeInput.value = button.dataset.type;
-    });
-});
+// Remove outdated user type selection logic since login.html now handles this
 
 // Input Field Animations (using CSS classes for focus/blur effects managed by JS)
 // The logic for adding/removing 'focused' class is already handled in form validation sections.
@@ -640,7 +426,7 @@ function validateInput(input) {
 
 // Function to show form messages (error or success) at the top of the form
 function showFormMessage(message, type) {
-    const form = contactForm || loginForm; // Target the appropriate form
+    const form = contactForm; // Only target contact form since login form is handled separately
     if (!form) return; // Exit if no form is found
 
     // Remove any existing form messages within the form container
