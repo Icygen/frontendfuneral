@@ -1,0 +1,316 @@
+/* Coffin Designs Section */
+.coffin-designs-section {
+    padding: 6rem 0;
+    background-color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.coffin-designs-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--dark-gray);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.coffin-showcase {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    align-items: center;
+}
+
+.coffin-display {
+    flex: 1 1 400px;
+    position: relative;
+    height: 400px;
+    perspective: 1000px;
+    max-width: 100%;
+}
+
+.coffin-lid {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 40%;
+    background-color: #5d4037;
+    border-radius: 10px 10px 0 0;
+    transform-origin: bottom center;
+    transition: transform 0.8s ease-in-out;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.coffin-lid.open {
+    transform: translateX(-50%) rotateX(-120deg);
+}
+
+.lid-handle {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 10px;
+    background-color: #8d6e63;
+    border-radius: 5px;
+}
+
+.coffin-body {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 60%;
+    background-color: #6d4c41;
+    border-radius: 0 0 10px 10px;
+    z-index: 2;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.coffin-handle {
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 10px;
+    background-color: #8d6e63;
+    border-radius: 5px;
+}
+
+.coffin-handle.left {
+    left: 15px;
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.coffin-handle.right {
+    right: 15px;
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.coffin-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M30,20 L70,20 L80,50 L70,80 L30,80 L20,50 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+    background-size: 100px 100px;
+    opacity: 0.5;
+}
+
+.coffin-stand {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 15px;
+    background-color: #4e342e;
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+    z-index: 1;
+}
+
+.coffin-details {
+    flex: 1 1 400px;
+    padding: 2rem;
+}
+
+.coffin-details h3 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.coffin-details p {
+    color: var(--dark-gray);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.option-group {
+    margin-bottom: 1.5rem;
+}
+
+.option-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--darker-gray);
+}
+
+.design-options, .material-options, .finish-options {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.design-option, .material-option, .finish-option {
+    background: none;
+    border: 2px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.design-option {
+    flex-direction: column;
+    padding: 1rem;
+    text-align: center;
+    min-width: 100px;
+}
+
+.design-preview {
+    width: 60px;
+    height: 30px;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.design-preview.traditional {
+    background: linear-gradient(135deg, #5d4037 0%, #3e2723 100%);
+}
+
+.design-preview.modern {
+    background: linear-gradient(135deg, #455a64 0%, #263238 100%);
+}
+
+.design-preview.eco {
+    background: linear-gradient(135deg, #689f38 0%, #33691e 100%);
+}
+
+.material-option.active, 
+.finish-option.active,
+.design-option.active {
+    border-color: var(--secondary);
+    background-color: rgba(214, 158, 46, 0.1);
+    color: var(--secondary-dark);
+    font-weight: 600;
+}
+
+.coffin-price {
+    margin: 2rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--medium-gray);
+    border-bottom: 1px solid var(--medium-gray);
+    text-align: center;
+}
+
+.coffin-price span {
+    display: block;
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.coffin-price .price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    font-family: var(--font-heading);
+}
+
+.btn-view-3d {
+    width: 100%;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.coffin-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.feature {
+    text-align: center;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    background-color: var(--light-gray);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.feature i {
+    font-size: 2.5rem;
+    color: var(--secondary);
+    margin-bottom: 1.5rem;
+}
+
+.feature h4 {
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+}
+
+.feature p {
+    color: var(--dark-gray);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .coffin-showcase {
+        flex-direction: column;
+    }
+    
+    .coffin-display {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .coffin-details {
+        width: 100%;
+        padding: 2rem 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .coffin-display {
+        height: 300px;
+    }
+    
+    .coffin-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .design-option {
+        min-width: 80px;
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .design-preview {
+        width: 50px;
+        height: 25px;
+    }
+}
